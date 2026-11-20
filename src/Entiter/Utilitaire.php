@@ -6,9 +6,7 @@ namespace App\Entiter;
 
 use App\Contrats\Entretenable;
 
-/**
- * Utilitaire : frais de nettoyage facturés une fois par location, entretien tous les 10 000 km.
- */
+
 class Utilitaire extends Vehicule implements Entretenable
 {
     public const SEUIL_ENTRETIEN = 10000;

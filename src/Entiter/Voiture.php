@@ -6,9 +6,7 @@ namespace App\Entiter;
 
 use App\Contrats\Entretenable;
 
-/**
- * Voiture : supplément de 10 € HT par jour au-delà de 5 places, entretien tous les 15 000 km.
- */
+
 class Voiture extends Vehicule implements Entretenable
 {
     public const SEUIL_ENTRETIEN = 15000;
