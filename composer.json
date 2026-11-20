@@ -1,0 +1,13 @@
+{
+    "name": "sashadlp/agence-location-vehicules",
+    "description": "Evaluation PHP Oriente Objet - Coeur applicatif d'une agence de location de vehicules",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=8.2"
+    }
+}
