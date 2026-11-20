@@ -7,10 +7,12 @@ require __DIR__ . '/vendor/autoload.php';
 
 use App\Entiter\Vehicule;
 use App\Entiter\Voiture;
+use App\Entiter\Utilitaire;
 
 // 1. Création des véhicules
 $clio = new Voiture('AB-123-CD', 'Renault', 'Clio', 42, 5);
 $espace = new Voiture('EF-456-GH', 'Renault', 'Espace', 60, 7);
+$master = new Utilitaire('IJ-789-KL', 'Renault', 'Master', 80, 12);
 
 ?>
 <!DOCTYPE html>
@@ -25,6 +27,7 @@ $espace = new Voiture('EF-456-GH', 'Renault', 'Espace', 60, 7);
   <h2>1. Véhicules</h2>
   <?= $clio ?>
   <?= $espace ?>
+  <?= $master ?>
 
   <h2>2. Nombre de véhicules créés</h2>
   <p><?= Vehicule::getNbVehicules() ?> véhicules</p>
