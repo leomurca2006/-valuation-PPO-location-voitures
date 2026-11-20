@@ -10,8 +10,10 @@ trait HistoriqueTrait
     public function ajouterHistorique(string $message): void
     {
         date_default_timezone_set('Europe/Paris');
-       
-        $this->historique[] = '['. date('d/m/Y H:i') .'] '. get_class($this) .' : '. $message;
+
+        // get_class() renvoie "App\Entiter\Voiture" : on ne garde que "Voiture"
+        $classe = (new \ReflectionClass($this))->getShortName();
+        $this->historique[] = '['. date('d/m/Y H:i') .'] '. $classe .' : '. $message;
     }
 
     
