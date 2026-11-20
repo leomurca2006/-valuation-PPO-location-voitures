@@ -35,8 +35,8 @@ final class VeloElectrique extends Vehicule
 
     public function calculerPrixHT(int $jours): float
     {
-        return $this->tarifJournalier * $jours;
-        
+        $prix = $this->tarifJournalier * $jours;
+
         if ($jours >= 7) {
             $prix *= 0.80;
         }
