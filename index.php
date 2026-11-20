@@ -10,6 +10,7 @@ use App\Entiter\Voiture;
 use App\Entiter\Utilitaire;
 use App\Entiter\VeloElectrique;
 use App\Entiter\Client;
+use App\Entiter\Location;
 
 // 1. Création des véhicules
 $clio = new Voiture('AB-123-CD', 'Renault', 'Clio', 42, 5);
@@ -26,6 +27,9 @@ try {
 } catch (InvalidArgumentException $e) {
     $erreurClient = $e->getMessage();
 }
+
+// Test de Location (en attendant l'Agence, qui créera les locations elle-même)
+$locationTest = new Location($jean, $clio, 3, $clio->louer(3));
 
 ?>
 <!DOCTYPE html>
@@ -50,5 +54,8 @@ try {
   <p>Client créé : <?= $jean ?></p>
   <p>Client créé : <?= $marie ?></p>
   <p>Erreur sur le 3e client : <?= $erreurClient ?></p>
+
+  <h2>Test Location</h2>
+  <p><?= $locationTest ?> (le <?= $locationTest->getDateDebut() ?>)</p>
 </body>
 </html>
