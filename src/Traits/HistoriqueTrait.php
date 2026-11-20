@@ -1,6 +1,10 @@
 <?php
+declare(strict_types=1);
 
-trait HistoriqueTrait {
+namespace App\Traits;
+
+trait HistoriqueTrait
+{
     private array $historique = [];
 
     public function ajouterHistorique(string $message): void
