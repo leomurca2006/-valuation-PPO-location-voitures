@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-// Autoload de Composer (PSR-4 : App\ => src/)
+
 require __DIR__ . '/vendor/autoload.php';
 
 use App\Entiter\Vehicule;
@@ -12,13 +12,12 @@ use App\Entiter\VeloElectrique;
 use App\Entiter\Client;
 use App\Entiter\Location;
 
-// 1. Création des véhicules
+// Création des véhicules
 $clio = new Voiture('AB-123-CD', 'Renault', 'Clio', 42, 5);
 $espace = new Voiture('EF-456-GH', 'Renault', 'Espace', 60, 7);
 $master = new Utilitaire('IJ-789-KL', 'Renault', 'Master', 80, 12);
 $velo = new VeloElectrique('MN-012-OP', 'Moustache', 'Samedi 28', 25, 120);
 
-// 4. Clients (le 3e a un email invalide)
 $jean = new Client('Dupont', 'Jean', 'jean.dupont@mail.fr', '0601020304');
 $marie = new Client('Martin', 'Marie', 'marie.martin@mail.fr');
 try {
@@ -28,7 +27,6 @@ try {
     $erreurClient = $e->getMessage();
 }
 
-// Test de Location (en attendant l'Agence, qui créera les locations elle-même)
 $locationTest = new Location($jean, $clio, 3, $clio->louer(3));
 
 ?>

@@ -6,8 +6,10 @@ declare(strict_types=1);
 namespace App\Entiter;
 
 use InvalidArgumentException;
+//classe VeloElectrique qui hérite de la classe Vehicule et représente un vélo électrique avec une autonomie spécifique
 final class VeloElectrique extends Vehicule
 {
+// function constructeur de la classe VeloElectrique qui initialise les propriétés du vélo électrique
     public function __construct(
         string $immatriculation,
         string $marque,
@@ -17,7 +19,7 @@ final class VeloElectrique extends Vehicule
     ) {
         parent::__construct($immatriculation, $marque, $modele, $tarifJournalier);
     }
-
+//Les fonction de la ligne 23 à 75 renvoie et definisse l'autonomie, calculer le prix HT et retourne le type du vehicule
     public function getAutonomie(): int
     {
         return $this->autonomie;

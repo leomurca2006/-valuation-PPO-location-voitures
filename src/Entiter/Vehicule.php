@@ -24,7 +24,7 @@ abstract class Vehicule implements Louable
     private string $modele;
     protected float $tarifJournalier;
     private bool $disponible = true;
-
+//constructeur de la classe vehicule qui initialise les propriétés du véhicule et incrémente le compteur de véhicules
     public function __construct(string $immatriculation, string $marque, string $modele, float $tarifJournalier)
     {
         $this->setImmatriculation($immatriculation)
@@ -34,7 +34,7 @@ abstract class Vehicule implements Louable
 
         self::$nbVehicules++;
     }
-
+//les fonctions de la ligne 38 a 138 renvoie et definisse l'immatriculation, la marque, le modele, le tarif journalier, la disponibilité du vehicule, loue le vehicule, rend le vehicule, calculer le prix HT, retourne le type du vehicule et retourne les informations du vehicule
     public static function getNbVehicules(): int
     {
         return self::$nbVehicules;

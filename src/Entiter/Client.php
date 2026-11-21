@@ -12,7 +12,7 @@ class Client
     private string $prenom;
     private string $email;
     private ?string $telephone;
-
+/*constructeur de client */
     public function __construct(string $nom, string $prenom, string $email, ?string $telephone = null)
     {
         $this->setNom($nom)
@@ -20,7 +20,7 @@ class Client
              ->setEmail($email)
              ->setTelephone($telephone);
     }
-
+/*les fonctions de la ligne 24 a 78 renvoie et definisse le nom prenom, mail, numero de telephone*/
     public function getNom(): string
     {
         return $this->nom;

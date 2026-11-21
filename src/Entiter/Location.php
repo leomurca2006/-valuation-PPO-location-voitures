@@ -6,6 +6,9 @@ namespace App\Entiter;
 
 class Location
 {
+    /*
+      Constructeur de la location (enregistre la date du jour par défaut)
+     */
     public function __construct(
         private Client $client,
         private Vehicule $vehicule,
@@ -16,7 +19,9 @@ class Location
         // Sans date, on enregistre la date du jour
         $this->dateDebut = $dateDebut ?? date('d/m/Y');
     }
-
+    /* 
+     de la ligne 25 a 49 les fonction suivante nous retourne les informations de la location(Prix, date debut loc,le nb de jour que le vehicule est loué, le nom du client et le vehicule loué)
+     */
     public function getClient(): Client
     {
         return $this->client;
