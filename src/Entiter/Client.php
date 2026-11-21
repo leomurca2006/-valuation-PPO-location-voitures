@@ -11,8 +11,9 @@ class Client
     private string $nom;
     private string $prenom;
     private string $email;
-    private ?string $telephone;
-/*constructeur de client */
+    private ?string $telephone; // optionnel
+
+    // Constructeur : passe par les setters (l'email est validé)
     public function __construct(string $nom, string $prenom, string $email, ?string $telephone = null)
     {
         $this->setNom($nom)
@@ -20,7 +21,7 @@ class Client
              ->setEmail($email)
              ->setTelephone($telephone);
     }
-/*les fonctions de la ligne 24 a 78 renvoie et definisse le nom prenom, mail, numero de telephone*/
+
     public function getNom(): string
     {
         return $this->nom;
@@ -50,6 +51,7 @@ class Client
         return $this->email;
     }
 
+    // Lève une InvalidArgumentException si l'email est invalide
     public function setEmail(string $email): self
     {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -72,11 +74,13 @@ class Client
         return $this;
     }
 
+    // Ex : Jean Dupont
     public function getNomComplet(): string
     {
         return "{$this->prenom} {$this->nom}";
     }
 
+    // Ex : Jean Dupont (jean.dupont@mail.fr)
     public function __toString(): string
     {
         return "{$this->getNomComplet()} ({$this->email})";

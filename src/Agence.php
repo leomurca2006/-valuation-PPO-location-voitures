@@ -138,8 +138,7 @@ class Agence
         $this->vehicules = $data['vehicules'];
         $this->locations = $data['locations'];
     }
-/*fonctions de sauvegarde de l'agence dans un fichier, crée le dossier si nécessaire*/
-
+    /* sauvegarde l'agence dans un fichier, crée le dossier si nécessaire */
     public function sauvegarder(string $fichier): void
     {
         $dossier = dirname($fichier);
@@ -147,8 +146,13 @@ class Agence
             mkdir($dossier, 0777, true);
         }
 
-        file_put_contents($fichier, serialize($this));
+        // Sans ce test, un échec d'écriture passerait inaperçu et la sauvegarde serait perdue
+        if (file_put_contents($fichier, serialize($this)) === false) {
+            throw new RuntimeException("Impossible d'écrire le fichier : {$fichier}");
+        }
     }
+
+    /* recrée l'agence à partir d'un fichier créé par sauvegarder() */
 
     public static function charger(string $fichier): Agence
     {

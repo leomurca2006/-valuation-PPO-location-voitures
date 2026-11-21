@@ -15,16 +15,18 @@ abstract class Vehicule implements Louable
 {
     use HistoriqueTrait;
 
-    public const  TVA = 1.20;
+    public const TVA = 1.20; // 20 % de TVA
 
+    // Compteur de véhicules créés, inaccessible depuis l'extérieur
     private static int $nbVehicules = 0;
 
     private string $immatriculation;
     private string $marque;
     private string $modele;
-    protected float $tarifJournalier;
+    protected float $tarifJournalier; // HT, accessible aux classes enfants
     private bool $disponible = true;
-//constructeur de la classe vehicule qui initialise les propriétés du véhicule et incrémente le compteur de véhicules
+
+    // Constructeur : passe par les setters (qui valident les données) puis incrémente le compteur
     public function __construct(string $immatriculation, string $marque, string $modele, float $tarifJournalier)
     {
         $this->setImmatriculation($immatriculation)
@@ -34,7 +36,8 @@ abstract class Vehicule implements Louable
 
         self::$nbVehicules++;
     }
-//les fonctions de la ligne 38 a 138 renvoie et definisse l'immatriculation, la marque, le modele, le tarif journalier, la disponibilité du vehicule, loue le vehicule, rend le vehicule, calculer le prix HT, retourne le type du vehicule et retourne les informations du vehicule
+
+    // Nombre total de véhicules créés
     public static function getNbVehicules(): int
     {
         return self::$nbVehicules;
@@ -45,6 +48,7 @@ abstract class Vehicule implements Louable
         return $this->immatriculation;
     }
 
+    // Format attendu : AB-123-CD
     public function setImmatriculation(string $immatriculation): self
     {
         if (!preg_match('/^[A-Z]{2}-\d{3}-[A-Z]{2}$/', $immatriculation)) {
@@ -84,6 +88,7 @@ abstract class Vehicule implements Louable
         return $this->tarifJournalier;
     }
 
+    // Refuse un tarif nul ou négatif
     public function setTarifJournalier(float $tarifJournalier): self
     {
         if ($tarifJournalier <= 0) {
@@ -106,6 +111,7 @@ abstract class Vehicule implements Louable
         return $this;
     }
 
+    // final : non redéfinissable. Renvoie le prix TTC, ou 0 si indisponible ou moins d'1 jour
     final public function louer(int $jours): float
     {
         if (!$this->disponible || $jours < 1) {
@@ -116,21 +122,24 @@ abstract class Vehicule implements Louable
         $prixTTC = round($prixHT * self::TVA, 2);
 
         $this->disponible = false;
-        $this->ajouterHistorique("Location pour {$jours} jour(s) - {$prixTTC} € TTC");
+        $this->ajouterHistorique("Location pour {$jours} jour(s) - " . number_format($prixTTC, 2) . " € TTC");
 
         return $prixTTC;
     }
 
+    // Remet le véhicule à disposition
     public function rendre(): void
     {
         $this->disponible = true;
         $this->ajouterHistorique("Véhicule rendu");
     }
 
+    // À définir dans chaque type de véhicule
     abstract public function calculerPrixHT(int $jours): float;
 
     abstract public function getType(): string;
 
+    // Carte HTML : type, marque, modèle, immatriculation, tarif TTC et disponibilité
     public function __toString(): string
     {
         $tarifTTC = round($this->tarifJournalier * self::TVA, 2);

@@ -5,18 +5,20 @@ namespace App\Traits;
 
 trait HistoriqueTrait
 {
-    private array $historique = [];
+    private array $historique = []; // lignes de l'historique
 
+    // Ajoute une ligne au format : [16/11/2026 14:30] Voiture : message
     public function ajouterHistorique(string $message): void
     {
         date_default_timezone_set('Europe/Paris');
 
-        // get_class() renvoie "App\Entiter\Voiture" : on ne garde que "Voiture"
+        // Dans un trait, __CLASS__ vaut la classe qui l'utilise (App\Entiter\Vehicule) et non "Voiture" :
+        // on prend donc le nom court de la vraie classe de l'objet
         $classe = (new \ReflectionClass($this))->getShortName();
         $this->historique[] = '['. date('d/m/Y H:i') .'] '. $classe .' : '. $message;
     }
 
-    
+    // Renvoie l'historique sous forme de liste HTML
     public function afficherHistorique(): string
     {
         $html = '<ul>';
